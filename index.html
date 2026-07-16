@@ -158,6 +158,7 @@
     font-weight:800;
     font-size:4rem;
     color:#fff;
+    object-fit: cover; /* Đảm bảo hình ảnh ngan.jpg không bị bóp méo */
   }
   
   .sticker-frame::after{content:"⭐";position:absolute;top:-16px;right:-10px;font-size:1.8rem;transform:rotate(14deg);}
@@ -378,11 +379,12 @@
     
     <!-- CẤU TRÚC MỚI: FLEX LAYOUT -->
     <div class="intro-flex">
-      <!-- BÊN TRÁI: ẢNH (STICKER FRAME) -->
+      <!-- BÊN TRÁI: ẢNH ĐẠI DIỆN -->
       <div class="intro-media reveal">
         <div class="sticker-frame">
           <div class="washi"></div>
-          <div class="frame-face">VN</div>
+          <!-- Chèn ảnh ngan.jpg làm ảnh đại diện thay thế cho chữ VN -->
+          <img src="ngan.jpg" alt="Vũ Thị Ngân" class="frame-face">
         </div>
       </div>
       
@@ -537,7 +539,7 @@
         { b: "Nền móng sắp xếp dữ liệu", t: "Thành thạo các thao tác cơ bản nhưng quan trọng: tạo thư mục con, sao chép, di chuyển, đổi tên tệp theo một quy tắc đặt tên nhất quán." },
         { b: "Thao tác nhanh bằng phím tắt", t: "Vận dụng linh hoạt các tổ hợp phím như Windows + E, Ctrl + C/V/X để xử lý tệp nhanh hơn nhiều so với chỉ dùng chuột." },
         { b: "Phân biệt xoá tạm và xoá hẳn", t: "Hiểu rõ sự khác nhau giữa đưa tệp vào Thùng rác và xoá vĩnh viễn bằng Shift + Delete, nhờ đó chủ động khôi phục khi cần." },
-        { b: "Tóm lại", t: "Bài tập tưởng nhỏ này lại là nền tảng cho một thói quen lưu trữ khoa học, giúp mình an tâm hơn khi khối lượng tài liệu học phần ngày một dày lên.", summary: true },
+        { b: "Tóm lại", t: "Bài tập tưởng nhỏ này lại là nền tảng cho một thói quen lưu trữ khoa học, giúp mình an tâm hơn khi khối lượng tài liệu học phần ngày một dày lên." },
       ]
     },
     {
@@ -602,7 +604,7 @@
         { b: "Không tin tuyệt đối vào AI", t: "Luôn đối chiếu, kiểm chứng thông tin AI đưa ra với nguồn học thuật đáng tin cậy trước khi đưa vào sản phẩm cuối." },
         { b: "Minh bạch khi trích dẫn", t: "Ý thức rõ tầm quan trọng của việc công khai vai trò của AI trong bài làm và trích dẫn nguồn đầy đủ để tôn trọng bản quyền." },
         { b: "Giữ vững tư duy độc lập", t: "Hiểu rằng AI chỉ thực sự hữu ích khi đi cùng khả năng tư duy phản biện của người dùng, tránh phụ thuộc dẫn đến suy giảm kỹ năng tự học." },
-        { b: "Tuân thủ quy định học thuật", t: "Áp dụng đúng các nguyên tắc đạo đức trong chính sách của trường để vừa khai thác công nghệ, vừa giữ vững sự chính trực." },
+        { b: "Tuân thủ quy định học thuật", t: "Áp dụng đúng các nguyên tắc đạo đức trong chính sách của trường để vừa khai thác công nghệ, vừa giữ vững sự chính chính trực." },
         { b: "Tóm lại", t: "Dự án đã giúp mình xây dựng một khung nguyên tắc cá nhân vững vàng, để sử dụng AI một cách chủ động, có trách nhiệm và tự tin hơn trong hành trình học tập.", summary: true },
       ]
     },
