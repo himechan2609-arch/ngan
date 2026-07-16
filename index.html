@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vũ Thị Ngân - Portfolio Công nghệ số</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-1:#f2fbff;
+    --bg-2:#e6f6ff;
+    --blue-soft:#d6efff;
+    --blue-mid:#a9dcff;
+    --blue:#5fb3ef;
+    --blue-deep:#2f7fc4;
+    --pink:#ffd6e7;
+    --pink-deep:#ff9fc2;
+    --mint:#c9f6e6;
+    --mint-deep:#7bd9bd;
+    --lavender:#e6ddff;
+    --yellow:#fff0ae;
+    --ink:#2b4a63;
+    --ink-soft:#6f8fa8;
+    --white:#ffffff;
+    --pop:5px 5px 0 var(--blue-deep);
+    --pop-sm:3px 3px 0 var(--blue-deep);
+    --pop-pink:4px 4px 0 var(--pink-deep);
+    --pop-mint:4px 4px 0 var(--mint-deep);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Quicksand','Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:var(--ink);
+    background:linear-gradient(160deg,var(--bg-1) 0%,var(--bg-2) 50%,#eaf8ff 100%);
+    background-attachment:fixed;
+    overflow-x:hidden;
+    position:relative;
+  }
+  h1,h2,h3{font-family:'Baloo 2', cursive, sans-serif;margin:0;color:var(--blue-deep);font-weight:700;}
+  p{line-height:1.75;}
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- floating ambience ---------- */
+  .blob{position:fixed;border-radius:50%;filter:blur(55px);opacity:.55;z-index:0;pointer-events:none;}
+  .blob-1{width:380px;height:380px;background:var(--blue-soft);top:-110px;left:-130px;animation:drift 22s ease-in-out infinite;}
+  .blob-2{width:340px;height:340px;background:var(--pink);bottom:-90px;right:-110px;animation:drift 26s ease-in-out infinite reverse;}
+  .blob-3{width:260px;height:260px;background:var(--yellow);top:42%;right:8%;animation:drift 18s ease-in-out infinite;}
+  @keyframes drift{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(28px,-36px) scale(1.08);}}
+  .clouds{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+  .cloud-el{position:absolute;top:-40px;animation:sail linear infinite;opacity:.8;}
+  @keyframes sail{
+    0%{transform:translateY(-6vh) translateX(-8vw) rotate(0deg);}
+    50%{transform:translateY(50vh) translateX(6vw) rotate(10deg);}
+    100%{transform:translateY(110vh) translateX(-6vw) rotate(-8deg);}
+  }
+  .cursor-glow{position:fixed;width:200px;height:200px;border-radius:50%;
+    background:radial-gradient(circle,rgba(159,220,255,0.45),transparent 70%);
+    transform:translate(-50%,-50%);pointer-events:none;z-index:2;opacity:0;transition:opacity .3s;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* ---------- floating pill nav ---------- */
+  .site-nav{position:sticky;top:16px;z-index:50;display:flex;justify-content:center;pointer-events:none;}
+  .nav-inner{pointer-events:auto;display:flex;align-items:center;gap:22px;background:var(--white);
+    border:3px solid var(--blue-deep);border-radius:999px;padding:8px 10px 8px 8px;box-shadow:var(--pop);}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .seal{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-mid));
+    color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Baloo 2', sans-serif;font-weight:800;font-size:1.15rem;
+    border:2.5px solid var(--blue-deep);line-height:1;}
+  .brand-name{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1.05rem;color:var(--blue-deep);line-height:1.1;display:block;}
+  .brand-id{font-size:.66rem;color:var(--ink-soft);letter-spacing:.03em;}
+  .nav-links{list-style:none;display:flex;gap:6px;margin:0;padding:0;}
+  .nav-link{text-decoration:none;font-weight:700;font-size:.85rem;color:var(--ink-soft);padding:8px 14px;border-radius:999px;transition:all .2s ease;}
+  .nav-link.active,.nav-link:hover{color:var(--blue-deep);background:var(--blue-soft);}
+  @media (max-width:900px){ .nav-links{display:none;} }
+
+  /* ---------- hero ---------- */
+  #trang-chu{position:relative;padding:56px 0 40px;text-align:center;overflow:hidden;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);border:2.5px solid var(--blue-deep);
+    padding:8px 18px;border-radius:999px;font-size:.85rem;font-weight:700;color:var(--ink);box-shadow:var(--pop-sm);}
+  .mascot-wrap{position:relative;width:190px;height:170px;margin:30px auto 6px;}
+  .mascot-wrap .sparkle{position:absolute;font-size:1.3rem;animation:twinkle 2.4s ease-in-out infinite;}
+  .sparkle.s1{top:0;left:6px;animation-delay:0s;}
+  .sparkle.s2{top:14px;right:0;animation-delay:.6s;}
+  .sparkle.s3{bottom:6px;left:0;animation-delay:1.2s;}
+  @keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8);}50%{opacity:1;transform:scale(1.15);}}
+  .mascot{width:100%;height:100%;animation:bob 3.6s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-10px) rotate(1deg);}}
+  #trang-chu h1{font-size:clamp(2.4rem,6vw,3.6rem);margin:8px 0 6px;line-height:1.1;}
+  .hero-sub{max-width:600px;margin:0 auto 24px;color:var(--ink-soft);font-size:1rem;}
+  .info-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:28px;}
+  .info-chip{background:var(--white);border:2.5px solid var(--blue-deep);padding:9px 16px;border-radius:16px;
+    font-size:.82rem;box-shadow:var(--pop-sm);transform:rotate(-1.5deg);}
+  .info-chip:nth-child(2){transform:rotate(1.4deg);}
+  .info-chip:nth-child(3){transform:rotate(-1deg);}
+  .info-chip:nth-child(4){transform:rotate(1.6deg);}
+  .info-chip b{display:block;color:var(--blue-deep);font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;}
+  .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font-weight:800;
+    text-decoration:none;font-size:.95rem;cursor:pointer;border:2.5px solid var(--blue-deep);
+    transition:transform .15s ease, box-shadow .15s ease;}
+  .btn-primary{background:var(--blue);color:#fff;box-shadow:var(--pop);}
+  .btn-ghost{background:var(--white);color:var(--blue-deep);box-shadow:var(--pop-sm);}
+  .btn:hover{transform:translate(2px,2px);box-shadow:0 0 0 0 transparent;}
+
+  .scallop{position:relative;height:44px;margin-top:10px;}
+  .scallop svg{width:100%;height:100%;display:block;}
+
+  section{padding:64px 0;position:relative;z-index:3;}
+  .section-head{text-align:center;max-width:620px;margin:0 auto 44px;}
+  .tag{display:inline-block;background:var(--white);border:2.5px solid var(--blue-deep);color:var(--blue-deep);font-weight:800;font-size:.78rem;
+    padding:6px 16px;border-radius:999px;margin-bottom:14px;box-shadow:var(--pop-sm);}
+  .section-head h2{font-size:clamp(1.8rem,3.5vw,2.3rem);margin-bottom:10px;line-height:1.2;}
+  .section-head p{color:var(--ink-soft);}
+
+  /* ---------- gioi thieu: NEW FLEX LAYOUT ---------- */
+  .intro-flex {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Khoảng cách giữa ảnh và chữ */
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .intro-media {
+    flex: 0 0 300px; /* Cố định chiều rộng cột ảnh */
+    display: flex;
+    justify-content: center;
+  }
+
+  .sticker-frame{
+    background:var(--white);
+    border:3px solid var(--blue-deep);
+    border-radius:28px;
+    padding:20px;
+    box-shadow:var(--pop);
+    transform:rotate(-2deg);
+    position:relative;
+    width: 100%;
+    max-width: 280px; /* Khống chế kích thước ảnh tối đa */
+  }
+  
+  .sticker-frame .frame-face{
+    width:100%;
+    aspect-ratio:1;
+    border-radius:20px;
+    background:linear-gradient(150deg,var(--blue-mid),var(--blue));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:4rem;
+    color:#fff;
+  }
+  
+  .sticker-frame::after{content:"⭐";position:absolute;top:-16px;right:-10px;font-size:1.8rem;transform:rotate(14deg);}
+  
+  .washi{
+    position:absolute;
+    top:-14px;
+    left:50%;
+    transform:translateX(-50%) rotate(-3deg);
+    width:80px;
+    height:24px;
+    background:rgba(169,220,255,.75);
+    border:1px solid rgba(255,255,255,.7);
+  }
+
+  .intro-text {
+    flex: 1; /* Cột chữ tự rộng ra */
+  }
+
+  .speech-bubble{
+    background:var(--white);
+    border:3px solid var(--blue-deep);
+    border-radius:28px;
+    padding:30px;
+    box-shadow:var(--pop);
+    position:relative;
+  }
+  
+  /* Bỏ phần đuôi bong bóng chat để nhìn chuyên nghiệp hơn trong bố cục flex */
+  .speech-bubble::before, .speech-bubble::after { display: none; }
+
+  .speech-bubble p{margin: 0 0 16px 0;}
+  .speech-bubble p:last-child {margin-bottom: 0;}
+  
+  .kw-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+  .kw-tag{background:var(--blue-soft);border:2px solid var(--blue-deep);border-radius:999px;padding:6px 14px;font-size:.8rem;font-weight:700;color:var(--blue-deep);}
+
+  /* Responsive cho phần giới thiệu */
+  @media (max-width:850px){
+    .intro-flex {
+      flex-direction: column; /* Chuyển thành 1 cột trên màn hình nhỏ */
+      gap: 40px;
+      text-align: center;
+    }
+    .intro-media {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+    .kw-tags { justify-content: center; }
+  }
+
+  /* ---------- muc tieu: quest cards ---------- */
+  .quest-row{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:900px;margin:0 auto;}
+  .quest-card{background:var(--white);border:3px solid var(--blue-deep);border-radius:26px;padding:26px 24px;box-shadow:var(--pop);}
+  .quest-card:nth-child(2){box-shadow:var(--pop-pink);border-color:var(--pink-deep);}
+  .quest-card:nth-child(2) h3{color:var(--pink-deep);}
+  .quest-card h3{font-size:1.2rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .quest-card ul{list-style:none;margin:0;padding:0;}
+  .quest-card li{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--ink);margin-bottom:12px;}
+  .quest-card li::before{content:"✓";flex-shrink:0;width:20px;height:20px;border-radius:6px;background:var(--mint);
+    border:1.5px solid var(--mint-deep);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--ink);margin-top:1px;}
+  @media (max-width:760px){ .quest-row{grid-template-columns:1fr;} }
+
+  /* ---------- bai tap: sticker cards ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 26px;}
+  .work-card{background:var(--white);border:3px solid var(--blue-deep);border-radius:24px;padding:24px 20px 20px;
+    box-shadow:var(--pop);cursor:pointer;position:relative;transition:transform .15s ease, box-shadow .15s ease;}
+  .work-card:nth-child(6n+2){box-shadow:var(--pop-pink);border-color:var(--pink-deep);}
+  .work-card:nth-child(6n+2) .view-detail{color:var(--pink-deep);}
+  .work-card:nth-child(6n+4){box-shadow:var(--pop-mint);border-color:var(--mint-deep);}
+  .work-card:nth-child(6n+4) .view-detail{color:var(--mint-deep);}
+  .work-card:hover{transform:translate(3px,3px);box-shadow:0 0 0 0 transparent;}
+  .work-card .num-badge{position:absolute;top:-12px;left:16px;font-size:.7rem;font-weight:800;color:var(--white);
+    background:var(--blue-deep);padding:4px 12px;border-radius:999px;}
+  .work-icon{font-size:1.9rem;margin-bottom:10px;display:block;}
+  .work-card h3{font-size:1.12rem;margin-bottom:8px;line-height:1.2;}
+  .work-goal{font-size:.85rem;color:var(--ink-soft);margin-bottom:14px;min-height:56px;}
+  .view-detail{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.83rem;color:var(--blue-deep);}
+  .view-detail .arrow{transition:transform .2s ease;}
+  .work-card:hover .arrow{transform:translateX(4px);}
+
+  /* ---------- modal ---------- */
+  .modal-overlay{position:fixed;inset:0;background:rgba(43,74,99,.45);backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;padding:24px;z-index:100;
+    opacity:0;pointer-events:none;transition:opacity .3s ease;}
+  .modal-overlay.open{opacity:1;pointer-events:auto;}
+  .modal-card{background:var(--white);border:3px solid var(--blue-deep);border-radius:28px;max-width:620px;width:100%;max-height:85vh;overflow-y:auto;
+    padding:34px 32px;box-shadow:var(--pop);position:relative;transform:translateY(24px) scale(.97);transition:transform .3s ease;}
+  .modal-overlay.open .modal-card{transform:translateY(0) scale(1);}
+  .modal-close{position:absolute;top:16px;right:18px;width:34px;height:34px;border-radius:50%;border:2.5px solid var(--blue-deep);
+    background:var(--white);color:var(--blue-deep);font-size:1rem;cursor:pointer;font-weight:800;}
+  .modal-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+  .modal-head .work-icon{margin:0;font-size:2.2rem;}
+  .modal-head h3{font-size:1.3rem;line-height:1.2;}
+  .modal-fields{background:var(--blue-soft);border-radius:18px;padding:16px 18px;margin-bottom:20px;font-size:.9rem;}
+  .modal-fields .row{margin-bottom:8px;}
+  .modal-fields .row:last-child{margin-bottom:0;}
+  .modal-fields b{color:var(--blue-deep);}
+  .modal-link{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);border:2px solid var(--blue-deep);color:var(--ink);
+    padding:9px 16px;border-radius:999px;font-weight:800;font-size:.83rem;text-decoration:none;margin-bottom:22px;}
+  .detail-list{display:flex;flex-direction:column;gap:11px;}
+  .detail-point{display:flex;gap:10px;font-size:.9rem;color:var(--ink);}
+  .detail-point .dot{width:9px;height:9px;border-radius:50%;background:var(--blue-mid);margin-top:7px;flex-shrink:0;}
+  .detail-point.summary{background:var(--blue-soft);border-radius:14px;padding:12px 14px;}
+  .detail-point.summary .dot{background:var(--blue-deep);}
+
+  /* ---------- tong ket: chat bubbles ---------- */
+  .chat-list{max-width:720px;margin:0 auto 44px;display:flex;flex-direction:column;gap:18px;}
+  .chat-row{display:flex;gap:14px;align-items:flex-end;}
+  .chat-row.left{flex-direction:row;}
+  .chat-row.right{flex-direction:row-reverse;text-align:right;}
+  .chat-avatar{width:44px;height:44px;border-radius:50%;background:var(--blue);border:2.5px solid var(--blue-deep);
+    display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+  .chat-bubble{background:var(--white);border:2.5px solid var(--blue-deep);border-radius:20px;padding:16px 20px;
+    box-shadow:var(--pop-sm);max-width:80%;}
+  .chat-row.right .chat-bubble{border-color:var(--pink-deep);box-shadow:var(--pop-pink);}
+  .chat-bubble h3{font-size:1rem;margin-bottom:6px;}
+  .chat-bubble p{font-size:.87rem;color:var(--ink-soft);margin:0;}
+
+  .final-banner{max-width:760px;margin:0 auto;background:var(--white);border:3px solid var(--blue-deep);
+    border-radius:28px;padding:32px 30px;box-shadow:var(--pop);text-align:center;}
+  .final-banner p{color:var(--ink-soft);font-size:.94rem;margin-bottom:22px;}
+  .medal-row{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;}
+  .medal{width:110px;height:110px;border-radius:50%;background:var(--blue-soft);border:3px solid var(--blue-deep);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--pop-sm);}
+  .medal:nth-child(2){background:var(--pink);border-color:var(--pink-deep);}
+  .medal:nth-child(3){background:var(--yellow);}
+  .medal .num{font-family:'Baloo 2',sans-serif;font-size:1.3rem;font-weight:800;color:var(--ink);
+    opacity:0;transform:scale(.7);transition:opacity .5s ease, transform .5s ease;}
+  .medal.in-view .num{opacity:1;transform:scale(1);}
+  .medal .label{font-size:.66rem;color:var(--ink-soft);margin-top:2px;text-align:center;padding:0 8px;}
+
+  footer{text-align:center;padding:32px 0;color:var(--ink-soft);font-size:.85rem;position:relative;z-index:3;}
+  .seal-mini{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;border:2px solid var(--blue-deep);
+    align-items:center;justify-content:center;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:.8rem;margin-right:6px;vertical-align:middle;line-height:1;}
+
+  @media (max-width:900px){
+    .work-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .work-grid{grid-template-columns:1fr;}
+    .chat-row.right{flex-direction:row-reverse;}
+    .chat-bubble{max-width:74%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+<div class="clouds" id="clouds" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="site-nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="seal">VN</div>
+      <div>
+        <span class="brand-name">Ngân</span><br>
+        <span class="brand-id">MSV 25042217</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#trang-chu" class="nav-link active">Trang chủ</a></li>
+      <li><a href="#gioi-thieu" class="nav-link">Giới thiệu</a></li>
+      <li><a href="#muc-tieu" class="nav-link">Mục tiêu</a></li>
+      <li><a href="#bai-tap" class="nav-link">Bài tập</a></li>
+      <li><a href="#tong-ket" class="nav-link">Tổng kết</a></li>
+    </ul>
+  </div>
+</div>
+
+<section id="trang-chu">
+  <div class="wrap">
+    <div class="reveal hero-badge">☁️ Nhật ký số · Học phần Nhập môn Công nghệ số</div>
+
+    <div class="mascot-wrap reveal">
+      <span class="sparkle s1">✨</span><span class="sparkle s2">⭐</span><span class="sparkle s3">💠</span>
+      <svg class="mascot" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="150" rx="70" ry="10" fill="#a9dcff" opacity="0.4"/>
+        <path d="M40,110 a35,35 0 0,1 10,-68 a45,45 0 0,1 88,-8 a38,38 0 0,1 22,72 a30,30 0 0,1 -10,58 h-90 a30,30 0 0,1 -20,-54 z"
+          fill="#eaf7ff" stroke="#2f7fc4" stroke-width="4"/>
+        <circle cx="78" cy="98" r="7" fill="#2b4a63"/>
+        <circle cx="126" cy="98" r="7" fill="#2b4a63"/>
+        <circle cx="66" cy="112" r="9" fill="#ffb8d3" opacity="0.8"/>
+        <circle cx="138" cy="112" r="9" fill="#ffb8d3" opacity="0.8"/>
+        <path d="M90,118 q12,12 24,0" stroke="#2b4a63" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <h1 class="reveal">Vũ Thị Ngân</h1>
+    <p class="hero-sub reveal">Đây là nơi mình tổng hợp lại chặng đường 6 bài thực hành đã đi qua trong học kỳ vừa rồi - từ sắp xếp dữ liệu, rèn thói quen thẩm định nguồn thông tin, cho đến làm quen với các công cụ trí tuệ nhân tạo, gắn với góc nhìn của một sinh viên đang theo đuổi ngôn ngữ và văn hoá Nhật Bản.</p>
+    <div class="info-chips reveal">
+      <span class="info-chip"><b>🎓 MSV</b>25042217</span>
+      <span class="info-chip"><b>📖 Ngành</b>Ngôn ngữ và văn hoá Nhật Bản</span>
+      <span class="info-chip"><b>🏫 Trường</b>Đại học Ngoại ngữ - ĐHQGHN</span>
+      <span class="info-chip"><b>🧾 Mã lớp</b>VNU1001_E252060</span>
+    </div>
+    <div class="hero-cta reveal">
+      <a href="#bai-tap" class="btn btn-primary">☁️ Xem 6 bài thực hành</a>
+      <a href="#gioi-thieu" class="btn btn-ghost">🎐 Đôi nét về mình</a>
+    </div>
+  </div>
+  <div class="scallop" aria-hidden="true">
+    <svg viewBox="0 0 1200 44" preserveAspectRatio="none">
+      <path d="M0,10 Q30,40 60,10 T120,10 T180,10 T240,10 T300,10 T360,10 T420,10 T480,10 T540,10 T600,10 T660,10 T720,10 T780,10 T840,10 T900,10 T960,10 T1020,10 T1080,10 T1140,10 T1200,10 V44 H0 Z" fill="#f2fbff"/>
+    </svg>
+  </div>
+</section>
+
+<section id="gioi-thieu">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">🌤️ 01 · Vài dòng về mình</span>
+      <h2>Xin chào, mình là Ngân</h2>
+    </div>
+    
+    <!-- CẤU TRÚC MỚI: FLEX LAYOUT -->
+    <div class="intro-flex">
+      <!-- BÊN TRÁI: ẢNH (STICKER FRAME) -->
+      <div class="intro-media reveal">
+        <div class="sticker-frame">
+          <div class="washi"></div>
+          <div class="frame-face">VN</div>
+        </div>
+      </div>
+      
+      <!-- BÊN PHẢI: NỘI DUNG GIỚI THIỆU -->
+      <div class="intro-text reveal">
+        <div class="speech-bubble">
+          <p>Mình hiện là sinh viên ngành Ngôn ngữ và văn hoá Nhật Bản tại Đại học Ngoại ngữ - ĐHQGHN. Vì thường xuyên tiếp xúc với chữ viết, ngữ pháp và những khác biệt văn hoá giữa hai nước, mình luôn tò mò xem công nghệ có thể hỗ trợ việc học ngôn ngữ, tra cứu tài liệu và tổ chức khối lượng kiến thức lớn như thế nào cho hiệu quả hơn.</p>
+          <p>Với mình, học phần VNU1001_E252060 không chỉ mang lại kỹ năng kỹ thuật, mà quan trọng hơn là giúp mình hình thành một góc nhìn cân bằng: biết tận dụng máy móc để tiết kiệm thời gian, nhưng vẫn luôn giữ quyền quyết định cuối cùng cho chính mình.</p>
+          <div class="kw-tags">
+            <span class="kw-tag">🗾 Người học ngôn ngữ</span>
+            <span class="kw-tag">🧩 Thích hệ thống hoá</span>
+            <span class="kw-tag">🔍 Chủ động với AI</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- end .intro-flex -->
+    
+  </div>
+</section>
+
+<section id="muc-tieu">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">🎯 02 · Định hướng</span>
+      <h2>Mục tiêu học tập &amp; Portfolio</h2>
+      <p>Hai chặng mình muốn đi tới khi khép lại học phần này.</p>
+    </div>
+    <div class="quest-row">
+      <div class="quest-card reveal">
+        <h3>🧭 Mục tiêu học tập</h3>
+        <ul>
+          <li>Trang bị kỹ năng số nền tảng để quản lý dữ liệu học tập một cách khoa học, có hệ thống.</li>
+          <li>Biết xem AI như công cụ hỗ trợ tra cứu, dịch thuật và tổng hợp, chứ không để nó thay mình suy nghĩ.</li>
+          <li>Rèn khả năng thẩm định độ tin cậy của nguồn tài liệu trước khi sử dụng.</li>
+          <li>Hình thành thói quen dùng công nghệ có chủ đích, minh bạch và có trách nhiệm.</li>
+        </ul>
+      </div>
+      <div class="quest-card reveal">
+        <h3>📔 Mục tiêu Portfolio</h3>
+        <ul>
+          <li>Ghi lại một lát cắt chân thực của học kỳ vừa qua, không tô vẽ cho khác với thực tế.</li>
+          <li>Thể hiện tinh thần chủ động ứng dụng công nghệ vào việc học của một sinh viên ngành Nhật Bản học.</li>
+          <li>Làm nền tảng để tiếp tục sử dụng công nghệ số có trách nhiệm ở những học phần tiếp theo.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bai-tap">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">📚 03 · Sản phẩm cá nhân</span>
+      <h2>Mục tiêu &amp; bài học rút ra từ mỗi bài</h2>
+      <p>Chạm vào một tấm thẻ để mở đầy đủ các bài học được liệt kê chi tiết.</p>
+    </div>
+    <div class="work-grid" id="workGrid"></div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Đóng">✕</button>
+    <div class="modal-head">
+      <span class="work-icon" id="modalIcon"></span>
+      <h3 id="modalTitle"></h3>
+    </div>
+    <div class="modal-fields">
+      <div class="row"><b>Mục tiêu:</b> <span id="modalGoal"></span></div>
+      <div class="row"><b>Quá trình thực hiện:</b> <span id="modalProcess"></span></div>
+    </div>
+    <a href="#" id="modalLink" class="modal-link" target="_blank" rel="noopener">📁 Xem tài liệu chi tiết</a>
+    <div class="detail-list" id="modalPoints"></div>
+  </div>
+</div>
+
+<section id="tong-ket">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">🎐 04 · Nhìn lại hành trình</span>
+      <h2>Sổ tay cuối kỳ &amp; Đúc kết</h2>
+      <p>Ba điều mình mang theo sau khi khép lại chuỗi bài thực hành này.</p>
+    </div>
+
+    <div class="chat-list">
+      <div class="chat-row left reveal">
+        <div class="chat-avatar">🗃️</div>
+        <div class="chat-bubble">
+          <h3>Nếp làm việc thay đổi từ những chi tiết nhỏ</h3>
+          <p>Khi sắp xếp lại portfolio, mình nhận ra sự tiến bộ rõ nhất lại bắt đầu từ những thói quen rất nhỏ hằng ngày. Thư mục không còn lộn xộn, tên file không còn tuỳ hứng - mình học được cách phân loại tài liệu khoa học hơn, thuận tiện cho việc tra cứu ngữ liệu song ngữ Việt - Nhật sau này.</p>
+        </div>
+      </div>
+      <div class="chat-row right reveal">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-bubble">
+          <h3>Xác định đúng vị trí của công cụ</h3>
+          <p>Qua từng bài thực hành, mình hiểu rằng AI chỉ thực sự hữu ích khi người dùng vẫn giữ được tư duy phản biện của riêng mình. Mình xem AI như một người bạn đồng hành gợi mở ý tưởng ban đầu, còn việc kiểm chứng ngữ cảnh vẫn luôn cần sự cẩn thận của bản thân.</p>
+        </div>
+      </div>
+      <div class="chat-row left reveal">
+        <div class="chat-avatar">🎯</div>
+        <div class="chat-bubble">
+          <h3>Điều đọng lại nhiều nhất</h3>
+          <p>Giá trị lớn nhất sau học kỳ này là việc tự xây được cho mình một quy chuẩn làm việc nghiêm túc, minh bạch trong môi trường số - điểm tựa để tự tin ứng dụng công nghệ vào những nghiên cứu sâu hơn về ngôn ngữ và văn hoá Nhật Bản.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="final-banner reveal">
+      <h3>Lời kết cho một học kỳ 🌸</h3>
+      <p>Nhìn lại cả chặng đường, mình biết ơn vì đã có cơ hội thử - sai - và điều chỉnh với từng công cụ, để giờ đây có thể tự tin nói rằng mình đã sẵn sàng cho những học phần công nghệ tiếp theo.</p>
+      <div class="medal-row">
+        <div class="medal"><div class="num">06/06</div><div class="label">Bài tập hoàn thành</div></div>
+        <div class="medal"><div class="num">100%</div><div class="label">Trung thực học thuật</div></div>
+        <div class="medal"><div class="num">A+</div><div class="label">Mục tiêu học phần</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="seal-mini">VN</span> Portfolio Công nghệ số của Vũ Thị Ngân ☁️
+</footer>
+
+<script>
+  const cloudEmojis = ['☁️','💠','✨','🎐','🕊️'];
+  const cloudLayer = document.getElementById('clouds');
+  for(let i = 0; i < 16; i++){
+    const el = document.createElement('div');
+    el.className = 'cloud-el';
+    el.textContent = cloudEmojis[i % cloudEmojis.length];
+    el.style.left = (Math.random() * 100) + 'vw';
+    el.style.animationDuration = (11 + Math.random() * 9) + 's';
+    el.style.animationDelay = (Math.random() * 10) + 's';
+    el.style.fontSize = (1 + Math.random() * 0.9) + 'rem';
+    cloudLayer.appendChild(el);
+  }
+
+  const glow = document.getElementById('cursorGlow');
+  window.addEventListener('mousemove', (e) => {
+    glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; glow.style.opacity = 1;
+  });
+  window.addEventListener('mouseleave', () => { glow.style.opacity = 0; });
+
+  const exercises = [
+    {
+      icon: "🗂️", title: "Quản lý tệp tin & thư mục",
+      goal: "Rèn luyện thao tác quản lý tệp và thư mục thành thạo để xây dựng nếp lưu trữ tài liệu học tập gọn gàng, dễ tra cứu.",
+      process: "Luyện tập tạo, sắp xếp, đổi tên và sao lưu tệp bằng cả chuột lẫn phím tắt, đồng thời tìm hiểu cách khôi phục dữ liệu an toàn từ Thùng rác.",
+      link: "https://docs.google.com/document/d/12WE83tctDp6ZYWud_1TLdmOt1QK6LZbp/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
+      points: [
+        { b: "Nền móng sắp xếp dữ liệu", t: "Thành thạo các thao tác cơ bản nhưng quan trọng: tạo thư mục con, sao chép, di chuyển, đổi tên tệp theo một quy tắc đặt tên nhất quán." },
+        { b: "Thao tác nhanh bằng phím tắt", t: "Vận dụng linh hoạt các tổ hợp phím như Windows + E, Ctrl + C/V/X để xử lý tệp nhanh hơn nhiều so với chỉ dùng chuột." },
+        { b: "Phân biệt xoá tạm và xoá hẳn", t: "Hiểu rõ sự khác nhau giữa đưa tệp vào Thùng rác và xoá vĩnh viễn bằng Shift + Delete, nhờ đó chủ động khôi phục khi cần." },
+        { b: "Tóm lại", t: "Bài tập tưởng nhỏ này lại là nền tảng cho một thói quen lưu trữ khoa học, giúp mình an tâm hơn khi khối lượng tài liệu học phần ngày một dày lên.", summary: true },
+      ]
+    },
+    {
+      icon: "🔎", title: "Đánh giá học thuật",
+      goal: "Nâng cao khả năng tìm kiếm, sàng lọc và thẩm định độ tin cậy của nguồn tài liệu trước khi đưa vào bài viết.",
+      process: "So sánh, đối chiếu nhiều nguồn khác nhau, ưu tiên các công trình có bình duyệt, và trình bày danh mục tham khảo theo chuẩn Harvard.",
+      link: "https://docs.google.com/document/d/1xNcPg2J7Wt7PSWL2a2YBcPtPjfPBTF5F/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
+      points: [
+        { b: "Tiêu trị sàng lọc nguồn", t: "Biết đánh giá độ tin cậy của một tài liệu dựa trên uy tín tác giả, đơn vị xuất bản, số lượt trích dẫn và việc có qua bình duyệt hay không." },
+        { b: "Trích dẫn đúng chuẩn", t: "Thành thạo cách trình bày danh mục tham khảo theo chuẩn Harvard - kỹ năng cần thiết khi làm các bài nghiên cứu về ngôn ngữ, văn hoá." },
+        { b: "Đối chiếu nhiều chiều", t: "Hiểu rằng mỗi loại nguồn có vai trò riêng, nên biết kết hợp giữa tài liệu chuyên sâu (bình duyệt) và nguồn cập nhật thực tiễn để có góc nhìn toàn diện." },
+        { b: "Chọn nguồn sát bối cảnh", t: "Ưu tiên những tài liệu phản ánh đúng bối cảnh giáo dục và văn hoá trong nước để tăng tính ứng dụng cho bài viết của mình." },
+      ]
+    },
+    {
+      icon: "🤖", title: "Viết Prompt hiệu quả",
+      goal: "Làm chủ kỹ năng xây dựng câu lệnh (prompt) có cấu trúc để khai thác tối đa năng lực của các mô hình ngôn ngữ lớn.",
+      process: "Thử nghiệm khung C.O.R.E, kết hợp kỹ thuật gán vai trò, ví dụ mẫu và yêu cầu suy luận từng bước để nâng chất lượng phản hồi của AI.",
+      link: "https://docs.google.com/document/d/1-G7omuzX1g6A013TOkOc7rnmGODlItRX/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
+      points: [
+        { b: "Tư duy thiết kế câu lệnh", t: "Chuyển từ việc hỏi ngẫu hứng sang xây dựng prompt có cấu trúc theo mô hình C.O.R.E, biến AI thành trợ lý sát với từng nhu cầu cụ thể." },
+        { b: "Kỹ thuật cải thiện đầu ra", t: "Áp dụng gán vai trò, ví dụ mẫu (few-shot) và yêu cầu suy luận từng bước (chain-of-thought) để hạn chế các câu trả lời chung chung, thiếu chính xác." },
+        { b: "Ưu tiên thời gian chuẩn bị", t: "Nhận ra rằng đầu tư thời gian viết prompt kỹ ngay từ đầu giúp tiết kiệm đáng kể công sức chỉnh sửa về sau." },
+        { b: "Tạo kết quả sát nhu cầu", t: "Biết định hướng AI cho ra sản phẩm phù hợp với mục đích học thuật cụ thể, ví dụ như dàn ý ôn tập theo thang Bloom hay bản tóm tắt tài liệu chuyên ngành ngôn ngữ - văn hoá Nhật Bản." },
+        { b: "Tóm lại", t: "Dự án này rèn cho mình không chỉ kỹ năng ra lệnh cho AI mà còn cả tư duy logic và khả năng diễn đạt rõ ràng - nền tảng để làm chủ công cụ công nghệ hiệu quả hơn.", summary: true },
+      ]
+    },
+    {
+      icon: "🤝", title: "Hợp tác trực tuyến",
+      goal: "Sử dụng thành thạo các công cụ cộng tác trực tuyến để phối hợp làm việc nhóm hiệu quả và trơn tru hơn.",
+      process: "Kết hợp Trello để theo dõi tiến độ và trao đổi nhanh, chia nhỏ đầu việc kèm deadline cụ thể cho từng thành viên.",
+      link: "https://docs.google.com/document/d/1sddYXB4HygTL1wa31HRO_MNI16QPOqFk/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
+      points: [
+        { b: "Kết nối công cụ hợp lý", t: "Biết phối hợp Trello, Google Drive và Google Docs thành một quy trình liền mạch thay vì sử dụng rời rạc, thiếu liên kết." },
+        { b: "Kỷ luật cập nhật tiến độ", t: "Hình thành thói quen cập nhật trạng thái công việc trực tiếp trên hệ thống chung thay vì chỉ trao đổi miệng, giúp cả nhóm nắm tiến độ minh bạch." },
+        { b: "Xử lý vướng mắc thực tế", t: "Học cách khắc phục các tình huống thường gặp khi làm nhóm như trôi thông tin, bằng các tính năng ghim và bình chọn trên nền tảng." },
+        { b: "Chủ động sắp xếp bản thân", t: "Biết chia nhỏ nhiệm vụ lớn thành các đầu việc rõ ràng, có mốc thời gian cụ thể, tránh dồn việc vào phút chót." },
+        { b: "Tóm lại", t: "Không chỉ nắm chắc công cụ, mình còn hình thành được tư duy làm việc nhóm hiện đại - kỹ năng mềm không thể thiếu trong môi trường số.", summary: true },
+      ]
+    },
+    {
+      icon: "🎨", title: "Sáng tạo nội dung với AI",
+      goal: "Ứng dụng AI tạo sinh để làm sản phẩm trình bày sinh động hơn nhưng vẫn giữ được dấu ấn cá nhân.",
+      process: "Phối hợp ChatGPT, DALL·E và Canva AI để lên ý tưởng, dựng hình và hoàn thiện sản phẩm theo tỉ lệ khoảng 40% AI - 60% cá nhân.",
+      link: "https://docs.google.com/document/d/1TNzw-drYQXpK2yK1djCWnlPFjpKx9DHy/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
+      points: [
+        { b: "AI là trợ lý, không thay thế", t: "Hiểu rằng AI giúp giảm tải công đoạn tìm ý tưởng và dựng hình, nhưng phong cách và quyết định cuối cùng vẫn thuộc về mình." },
+        { b: "Ra lệnh và tinh chỉnh liên tục", t: "Luyện cách mô tả yêu cầu chi tiết, sau đó tinh chỉnh prompt nhiều lần khi kết quả ban đầu chưa như mong muốn." },
+        { b: "Không dùng nguyên si", t: "Hình thành thói quen luôn kiểm tra, chỉnh sửa nội dung do AI tạo ra để đảm bảo đúng ngữ cảnh và chính xác về thông tin, đặc biệt với các thuật ngữ liên quan đến Nhật Bản." },
+        { b: "Tận dụng thế mạnh từng nền tảng", t: "Biết khai thác ưu điểm riêng của từng công cụ - ChatGPT cho nội dung, DALL·E cho hình ảnh, Canva AI cho thiết kế - để tối ưu quy trình sáng tạo." },
+        { b: "Ý thức đạo đức số", t: "Luôn minh bạch khi công bố phần nào có sự hỗ trợ của AI, tôn trọng bản quyền và chịu trách nhiệm cuối cùng với sản phẩm của mình." },
+        { b: "Tóm lại", t: "Mình đã chuyển từ vai trò người dùng công cụ thụ động sang người điều phối quy trình sáng tạo, biết cân bằng giữa sức mạnh AI và dấu ấn cá nhân.", summary: true },
+      ]
+    },
+    {
+      icon: "⚖️", title: "Sử dụng AI có trách nhiệm",
+      goal: "Hiểu rõ nguyên tắc liêm chính học thuật khi ứng dụng AI vào việc học và nghiên cứu.",
+      process: "Tìm hiểu quy định của trường về sử dụng AI, tự đối chiếu nội dung AI tạo ra với nguồn gốc, đồng thời trích dẫn minh bạch.",
+      link: "https://docs.google.com/document/d/18XCMtVj7HJg5NsAhBgkdO5wxWW-rpsu0/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
+      points: [
+        { b: "Ranh giới hỗ trợ và gian lận", t: "Phân biệt rõ giữa dùng AI như một trợ lý học tập (gợi ý ý tưởng, dàn ý) với việc sao chép nguyên văn - vốn bị xem là gian lận học thuật." },
+        { b: "Không tin tuyệt đối vào AI", t: "Luôn đối chiếu, kiểm chứng thông tin AI đưa ra với nguồn học thuật đáng tin cậy trước khi đưa vào sản phẩm cuối." },
+        { b: "Minh bạch khi trích dẫn", t: "Ý thức rõ tầm quan trọng của việc công khai vai trò của AI trong bài làm và trích dẫn nguồn đầy đủ để tôn trọng bản quyền." },
+        { b: "Giữ vững tư duy độc lập", t: "Hiểu rằng AI chỉ thực sự hữu ích khi đi cùng khả năng tư duy phản biện của người dùng, tránh phụ thuộc dẫn đến suy giảm kỹ năng tự học." },
+        { b: "Tuân thủ quy định học thuật", t: "Áp dụng đúng các nguyên tắc đạo đức trong chính sách của trường để vừa khai thác công nghệ, vừa giữ vững sự chính trực." },
+        { b: "Tóm lại", t: "Dự án đã giúp mình xây dựng một khung nguyên tắc cá nhân vững vàng, để sử dụng AI một cách chủ động, có trách nhiệm và tự tin hơn trong hành trình học tập.", summary: true },
+      ]
+    },
+  ];
+
+  const workGrid = document.getElementById('workGrid');
+  exercises.forEach((ex, i) => {
+    const card = document.createElement('div');
+    card.className = 'work-card reveal';
+    card.innerHTML = `
+      <div class="num-badge">Bài ${i + 1}</div>
+      <span class="work-icon">${ex.icon}</span>
+      <h3>${ex.title}</h3>
+      <p class="work-goal">${ex.goal}</p>
+      <span class="view-detail">Xem chi tiết <span class="arrow">→</span></span>`;
+    card.addEventListener('click', () => openModal(ex));
+    workGrid.appendChild(card);
+  });
+
+  const overlay = document.getElementById('modalOverlay');
+  const modalIcon = document.getElementById('modalIcon');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalGoal = document.getElementById('modalGoal');
+  const modalProcess = document.getElementById('modalProcess');
+  const modalLink = document.getElementById('modalLink');
+  const modalPoints = document.getElementById('modalPoints');
+  const modalClose = document.getElementById('modalClose');
+
+  function openModal(ex){
+    modalIcon.textContent = ex.icon;
+    modalTitle.textContent = ex.title;
+    modalGoal.textContent = ex.goal;
+    modalProcess.textContent = ex.process;
+    modalLink.href = ex.link;
+    modalPoints.innerHTML = ex.points.map(p => `
+      <div class="detail-point${p.summary ? ' summary' : ''}">
+        <span class="dot"></span>
+        <span><b>${p.b}:</b> ${p.t}</span>
+      </div>`).join('');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+  window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+  const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach((el, i) => { el.style.transitionDelay = (i % 4) * 0.07 + 's'; });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  const medals = document.querySelectorAll('.medal');
+  const medalIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in-view'); medalIo.unobserve(entry.target); }
+    });
+  }, { threshold: 0.4 });
+  medals.forEach(el => medalIo.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+  const navIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => navIo.observe(s));
+
+  window.addEventListener('beforeprint', () => {
+    reveals.forEach(el => el.classList.add('in-view'));
+    medals.forEach(el => el.classList.add('in-view'));
+  });
+</script>
+</body>
+</html>
