@@ -119,17 +119,17 @@
   .section-head h2{font-size:clamp(1.8rem,3.5vw,2.3rem);margin-bottom:10px;line-height:1.2;}
   .section-head p{color:var(--ink-soft);}
 
-  /* ---------- gioi thieu: NEW FLEX LAYOUT ---------- */
+  /* ---------- gioi thieu: STICKER LAYOUT WITH REAL PORTRAIT ---------- */
   .intro-flex {
     display: flex;
     align-items: center;
-    gap: 50px; /* Khoảng cách giữa ảnh và chữ */
+    gap: 50px;
     max-width: 1000px;
     margin: 0 auto;
   }
   
   .intro-media {
-    flex: 0 0 300px; /* Cố định chiều rộng cột ảnh */
+    flex: 0 0 300px;
     display: flex;
     justify-content: center;
   }
@@ -143,7 +143,7 @@
     transform:rotate(-2deg);
     position:relative;
     width: 100%;
-    max-width: 280px; /* Khống chế kích thước ảnh tối đa */
+    max-width: 280px;
   }
   
   .sticker-frame .frame-face{
@@ -154,11 +154,13 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    font-family:'Baloo 2',sans-serif;
-    font-weight:800;
-    font-size:4rem;
-    color:#fff;
-    object-fit: cover; /* Đảm bảo hình ảnh ngan.jpg không bị bóp méo */
+    overflow: hidden; /* Cắt các phần thừa của ảnh để bo tròn hoàn hảo */
+  }
+
+  .sticker-frame .frame-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Giúp ảnh không bị méo tỉ lệ khi co giãn */
   }
   
   .sticker-frame::after{content:"⭐";position:absolute;top:-16px;right:-10px;font-size:1.8rem;transform:rotate(14deg);}
@@ -172,10 +174,11 @@
     height:24px;
     background:rgba(169,220,255,.75);
     border:1px solid rgba(255,255,255,.7);
+    z-index: 2; /* Nằm đè lên trên ảnh chân dung */
   }
 
   .intro-text {
-    flex: 1; /* Cột chữ tự rộng ra */
+    flex: 1;
   }
 
   .speech-bubble{
@@ -187,7 +190,6 @@
     position:relative;
   }
   
-  /* Bỏ phần đuôi bong bóng chat để nhìn chuyên nghiệp hơn trong bố cục flex */
   .speech-bubble::before, .speech-bubble::after { display: none; }
 
   .speech-bubble p{margin: 0 0 16px 0;}
@@ -196,10 +198,9 @@
   .kw-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
   .kw-tag{background:var(--blue-soft);border:2px solid var(--blue-deep);border-radius:999px;padding:6px 14px;font-size:.8rem;font-weight:700;color:var(--blue-deep);}
 
-  /* Responsive cho phần giới thiệu */
   @media (max-width:850px){
     .intro-flex {
-      flex-direction: column; /* Chuyển thành 1 cột trên màn hình nhỏ */
+      flex-direction: column;
       gap: 40px;
       text-align: center;
     }
@@ -377,18 +378,18 @@
       <h2>Xin chào, mình là Ngân</h2>
     </div>
     
-    <!-- CẤU TRÚC MỚI: FLEX LAYOUT -->
     <div class="intro-flex">
-      <!-- BÊN TRÁI: ẢNH ĐẠI DIỆN -->
+      <!-- BÊN TRÁI: ẢNH ĐẠI DIỆN TRONG KHUNG STICKER -->
       <div class="intro-media reveal">
         <div class="sticker-frame">
           <div class="washi"></div>
-          <!-- Chèn ảnh ngan.jpg làm ảnh đại diện thay thế cho chữ VN -->
-          <img src="ngan.jpg" alt="Vũ Thị Ngân" class="frame-face">
+          <div class="frame-face">
+            <img src="ngan.jpg" alt="Vũ Thị Ngân">
+          </div>
         </div>
       </div>
       
-      <!-- BÊN PHẢI: NỘI DUNG GIỚI THIỆU -->
+      <!-- BÊN PHẢI: PHẦN GIỚI THIỆU -->
       <div class="intro-text reveal">
         <div class="speech-bubble">
           <p>Mình hiện là sinh viên ngành Ngôn ngữ và văn hoá Nhật Bản tại Đại học Ngoại ngữ - ĐHQGHN. Vì thường xuyên tiếp xúc với chữ viết, ngữ pháp và những khác biệt văn hoá giữa hai nước, mình luôn tò mò xem công nghệ có thể hỗ trợ việc học ngôn ngữ, tra cứu tài liệu và tổ chức khối lượng kiến thức lớn như thế nào cho hiệu quả hơn.</p>
@@ -400,7 +401,7 @@
           </div>
         </div>
       </div>
-    </div><!-- end .intro-flex -->
+    </div> <!-- end .intro-flex -->
     
   </div>
 </section>
@@ -539,7 +540,7 @@
         { b: "Nền móng sắp xếp dữ liệu", t: "Thành thạo các thao tác cơ bản nhưng quan trọng: tạo thư mục con, sao chép, di chuyển, đổi tên tệp theo một quy tắc đặt tên nhất quán." },
         { b: "Thao tác nhanh bằng phím tắt", t: "Vận dụng linh hoạt các tổ hợp phím như Windows + E, Ctrl + C/V/X để xử lý tệp nhanh hơn nhiều so với chỉ dùng chuột." },
         { b: "Phân biệt xoá tạm và xoá hẳn", t: "Hiểu rõ sự khác nhau giữa đưa tệp vào Thùng rác và xoá vĩnh viễn bằng Shift + Delete, nhờ đó chủ động khôi phục khi cần." },
-        { b: "Tóm lại", t: "Bài tập tưởng nhỏ này lại là nền tảng cho một thói quen lưu trữ khoa học, giúp mình an tâm hơn khi khối lượng tài liệu học phần ngày một dày lên." },
+        { b: "Tóm lại", t: "Bài tập tưởng nhỏ này lại là nền tảng cho một thói quen lưu trữ khoa học, giúp mình an tâm hơn khi khối lượng tài liệu học phần ngày một dày lên.", summary: true },
       ]
     },
     {
@@ -548,7 +549,7 @@
       process: "So sánh, đối chiếu nhiều nguồn khác nhau, ưu tiên các công trình có bình duyệt, và trình bày danh mục tham khảo theo chuẩn Harvard.",
       link: "https://docs.google.com/document/d/1xNcPg2J7Wt7PSWL2a2YBcPtPjfPBTF5F/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
       points: [
-        { b: "Tiêu trị sàng lọc nguồn", t: "Biết đánh giá độ tin cậy của một tài liệu dựa trên uy tín tác giả, đơn vị xuất bản, số lượt trích dẫn và việc có qua bình duyệt hay không." },
+        { b: "Tiêu chí sàng lọc nguồn", t: "Biết đánh giá độ tin cậy của một tài liệu dựa trên uy tín tác giả, đơn vị xuất bản, số lượt trích dẫn và việc có qua bình duyệt hay không." },
         { b: "Trích dẫn đúng chuẩn", t: "Thành thạo cách trình bày danh mục tham khảo theo chuẩn Harvard - kỹ năng cần thiết khi làm các bài nghiên cứu về ngôn ngữ, văn hoá." },
         { b: "Đối chiếu nhiều chiều", t: "Hiểu rằng mỗi loại nguồn có vai trò riêng, nên biết kết hợp giữa tài liệu chuyên sâu (bình duyệt) và nguồn cập nhật thực tiễn để có góc nhìn toàn diện." },
         { b: "Chọn nguồn sát bối cảnh", t: "Ưu tiên những tài liệu phản ánh đúng bối cảnh giáo dục và văn hoá trong nước để tăng tính ứng dụng cho bài viết của mình." },
@@ -604,7 +605,7 @@
         { b: "Không tin tuyệt đối vào AI", t: "Luôn đối chiếu, kiểm chứng thông tin AI đưa ra với nguồn học thuật đáng tin cậy trước khi đưa vào sản phẩm cuối." },
         { b: "Minh bạch khi trích dẫn", t: "Ý thức rõ tầm quan trọng của việc công khai vai trò của AI trong bài làm và trích dẫn nguồn đầy đủ để tôn trọng bản quyền." },
         { b: "Giữ vững tư duy độc lập", t: "Hiểu rằng AI chỉ thực sự hữu ích khi đi cùng khả năng tư duy phản biện của người dùng, tránh phụ thuộc dẫn đến suy giảm kỹ năng tự học." },
-        { b: "Tuân thủ quy định học thuật", t: "Áp dụng đúng các nguyên tắc đạo đức trong chính sách của trường để vừa khai thác công nghệ, vừa giữ vững sự chính chính trực." },
+        { b: "Tuân thủ quy định học thuật", t: "Áp dụng đúng các nguyên tắc đạo đức trong chính sách của trường để vừa khai thác công nghệ, vừa giữ vững sự chính trực." },
         { b: "Tóm lại", t: "Dự án đã giúp mình xây dựng một khung nguyên tắc cá nhân vững vàng, để sử dụng AI một cách chủ động, có trách nhiệm và tự tin hơn trong hành trình học tập.", summary: true },
       ]
     },
