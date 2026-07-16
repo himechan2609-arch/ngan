@@ -84,17 +84,14 @@
   #trang-chu{position:relative;padding:56px 0 40px;text-align:center;overflow:hidden;}
   .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);border:2.5px solid var(--blue-deep);
     padding:8px 18px;border-radius:999px;font-size:.85rem;font-weight:700;color:var(--ink);box-shadow:var(--pop-sm);}
-  
-  /* Đã thu nhỏ linh vật đám mây tại đây */
-  .mascot-wrap{position:relative;width:120px;height:110px;margin:24px auto 12px;}
-  .mascot-wrap .sparkle{position:absolute;font-size:1.1rem;animation:twinkle 2.4s ease-in-out infinite;}
-  .sparkle.s1{top:-6px;left:-6px;animation-delay:0s;}
-  .sparkle.s2{top:8px;right:-10px;animation-delay:.6s;}
-  .sparkle.s3{bottom:-2px;left:-8px;animation-delay:1.2s;}
+  .mascot-wrap{position:relative;width:190px;height:170px;margin:30px auto 6px;}
+  .mascot-wrap .sparkle{position:absolute;font-size:1.3rem;animation:twinkle 2.4s ease-in-out infinite;}
+  .sparkle.s1{top:0;left:6px;animation-delay:0s;}
+  .sparkle.s2{top:14px;right:0;animation-delay:.6s;}
+  .sparkle.s3{bottom:6px;left:0;animation-delay:1.2s;}
   @keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8);}50%{opacity:1;transform:scale(1.15);}}
   .mascot{width:100%;height:100%;animation:bob 3.6s ease-in-out infinite;}
-  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-6px) rotate(1deg);}}
-  
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-10px) rotate(1deg);}}
   #trang-chu h1{font-size:clamp(2.4rem,6vw,3.6rem);margin:8px 0 6px;line-height:1.1;}
   .hero-sub{max-width:600px;margin:0 auto 24px;color:var(--ink-soft);font-size:1rem;}
   .info-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:28px;}
@@ -122,7 +119,7 @@
   .section-head h2{font-size:clamp(1.8rem,3.5vw,2.3rem);margin-bottom:10px;line-height:1.2;}
   .section-head p{color:var(--ink-soft);}
 
-  /* ---------- gioi thieu: STICKER LAYOUT WITH REAL PORTRAIT ---------- */
+  /* ---------- gioi thieu: NEW FLEX LAYOUT ---------- */
   .intro-flex {
     display: flex;
     align-items: center;
@@ -157,13 +154,10 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow: hidden;
-  }
-
-  .sticker-frame .frame-face img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:4rem;
+    color:#fff;
   }
   
   .sticker-frame::after{content:"⭐";position:absolute;top:-16px;right:-10px;font-size:1.8rem;transform:rotate(14deg);}
@@ -177,7 +171,6 @@
     height:24px;
     background:rgba(169,220,255,.75);
     border:1px solid rgba(255,255,255,.7);
-    z-index: 2;
   }
 
   .intro-text {
@@ -194,7 +187,6 @@
   }
   
   .speech-bubble::before, .speech-bubble::after { display: none; }
-
   .speech-bubble p{margin: 0 0 16px 0;}
   .speech-bubble p:last-child {margin-bottom: 0;}
   
@@ -269,16 +261,16 @@
   .detail-point.summary{background:var(--blue-soft);border-radius:14px;padding:12px 14px;}
   .detail-point.summary .dot{background:var(--blue-deep);}
 
-  /* ---------- tong ket: chat bubbles ---------- */
-  .chat-list{max-width:720px;margin:0 auto 44px;display:flex;flex-direction:column;gap:18px;}
-  .chat-row{display:flex;gap:14px;align-items:flex-end;}
-  .chat-row.left{flex-direction:row;}
-  .chat-row.right{flex-direction:row-reverse;text-align:right;}
+  /* ---------- tong ket: BAO GOM CHAT BUBBLES DA DUOC DONG BO ---------- */
+  .chat-list{max-width:720px;margin:0 auto 44px;display:flex;flex-direction:column;gap:20px;}
+  .chat-row{display:flex;gap:16px;align-items:flex-start;text-align:left;flex-direction:row;} /* Đồng bộ chiều hiển thị từ trái qua */
   .chat-avatar{width:44px;height:44px;border-radius:50%;background:var(--blue);border:2.5px solid var(--blue-deep);
     display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
   .chat-bubble{background:var(--white);border:2.5px solid var(--blue-deep);border-radius:20px;padding:16px 20px;
-    box-shadow:var(--pop-sm);max-width:80%;}
-  .chat-row.right .chat-bubble{border-color:var(--pink-deep);box-shadow:var(--pop-pink);}
+    box-shadow:var(--pop-sm);max-width:85%;width:100%;}
+  /* Màu sắc viền các bong bóng lần lượt để giữ nét sinh động */
+  .chat-row:nth-child(2) .chat-bubble {border-color:var(--pink-deep);box-shadow:var(--pop-pink);}
+  .chat-row:nth-child(3) .chat-bubble {border-color:var(--blue-deep);box-shadow:var(--pop-sm);}
   .chat-bubble h3{font-size:1rem;margin-bottom:6px;}
   .chat-bubble p{font-size:.87rem;color:var(--ink-soft);margin:0;}
 
@@ -304,8 +296,7 @@
   }
   @media (max-width:560px){
     .work-grid{grid-template-columns:1fr;}
-    .chat-row.right{flex-direction:row-reverse;}
-    .chat-bubble{max-width:74%;}
+    .chat-bubble{max-width:100%;}
   }
 </style>
 </head>
@@ -340,7 +331,6 @@
   <div class="wrap">
     <div class="reveal hero-badge">☁️ Nhật ký số · Học phần Nhập môn Công nghệ số</div>
 
-    <!-- Linh vật đám mây kích cỡ nhỏ nhắn hơn -->
     <div class="mascot-wrap reveal">
       <span class="sparkle s1">✨</span><span class="sparkle s2">⭐</span><span class="sparkle s3">💠</span>
       <svg class="mascot" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
@@ -356,7 +346,7 @@
     </div>
 
     <h1 class="reveal">Vũ Thị Ngân</h1>
-    <p class="hero-sub reveal">Đây là nơi mình tổng hợp lại chặng đường 6 bài thực hành đã đi qua trong học kỳ vừa rồi - từ sắp xếp dữ liệu, rèn thói quen thẩm định nguồn thông tin, cho đến làm quen với các công cụ trí tuệ nhân tạo, gắn với góc nhìn của một sinh viên đang theo đuổi ngôn ngữ và văn hoá Nhật Bản.</p>
+    <p class="hero-sub reveal">Đây là nơi mình tổng hợp lại chặng đường 6 bài thực hành đã đi qua trong học kỳ vừa rồi, từ sắp xếp dữ liệu, rèn thói quen thẩm định nguồn thông tin, cho đến làm quen với các công cụ trí tuệ nhân tạo, gắn với góc nhìn của một sinh viên đang theo đuổi ngôn ngữ và văn hoá Nhật Bản.</p>
     <div class="info-chips reveal">
       <span class="info-chip"><b>🎓 MSV</b>25042217</span>
       <span class="info-chip"><b>📖 Ngành</b>Ngôn ngữ và văn hoá Nhật Bản</span>
@@ -383,20 +373,16 @@
     </div>
     
     <div class="intro-flex">
-      <!-- BÊN TRÁI: ẢNH ĐẠI DIỆN TRONG KHUNG STICKER -->
       <div class="intro-media reveal">
         <div class="sticker-frame">
           <div class="washi"></div>
-          <div class="frame-face">
-            <img src="ngan.jpg" alt="Vũ Thị Ngân">
-          </div>
+          <div class="frame-face">VN</div>
         </div>
       </div>
       
-      <!-- BÊN PHẢI: PHẦN GIỚI THIỆU -->
       <div class="intro-text reveal">
         <div class="speech-bubble">
-          <p>Mình hiện là sinh viên ngành Ngôn ngữ và văn hoá Nhật Bản tại Đại học Ngoại ngữ - ĐHQGHN. Vì thường xuyên tiếp xúc với chữ viết, ngữ pháp và những khác biệt văn hoá giữa hai nước, mình luôn tò mò xem công nghệ có thể hỗ trợ việc học ngôn ngữ, tra cứu tài liệu và tổ chức khối lượng kiến thức lớn như thế nào cho hiệu quả hơn.</p>
+          <p>Mình hiện là sinh viên ngành Ngôn ngữ và văn hoá Nhật Bản tại Đại học Ngoại ngữ, Đại học Quốc gia Hà Nội. Vì thường xuyên tiếp xúc với chữ viết, ngữ pháp và những khác biệt văn hoá giữa hai nước, mình luôn tò mò xem công nghệ có thể hỗ trợ việc học ngôn ngữ, tra cứu tài liệu và tổ chức khối lượng kiến thức lớn như thế nào cho hiệu quả hơn.</p>
           <p>Với mình, học phần VNU1001_E252060 không chỉ mang lại kỹ năng kỹ thuật, mà quan trọng hơn là giúp mình hình thành một góc nhìn cân bằng: biết tận dụng máy móc để tiết kiệm thời gian, nhưng vẫn luôn giữ quyền quyết định cuối cùng cho chính mình.</p>
           <div class="kw-tags">
             <span class="kw-tag">🗾 Người học ngôn ngữ</span>
@@ -405,7 +391,7 @@
           </div>
         </div>
       </div>
-    </div> <!-- end .intro-flex -->
+    </div>
     
   </div>
 </section>
@@ -474,33 +460,34 @@
       <p>Ba điều mình mang theo sau khi khép lại chuỗi bài thực hành này.</p>
     </div>
 
+    <!-- BỐ CỤC ĐÃ ĐƯỢC CHỈNH LẠI ĐỒNG NHẤT, KHÔNG BỊ ĐẢO CHIỀU -->
     <div class="chat-list">
-      <div class="chat-row left reveal">
+      <div class="chat-row reveal">
         <div class="chat-avatar">🗃️</div>
         <div class="chat-bubble">
           <h3>Nếp làm việc thay đổi từ những chi tiết nhỏ</h3>
-          <p>Khi sắp xếp lại portfolio, mình nhận ra sự tiến bộ rõ nhất lại bắt đầu từ những thói quen rất nhỏ hằng ngày. Thư mục không còn lộn xộn, tên file không còn tuỳ hứng - mình học được cách phân loại tài liệu khoa học hơn, thuận tiện cho việc tra cứu ngữ liệu song ngữ Việt - Nhật sau này.</p>
+          <p>Khi sắp xếp lại portfolio, mình nhận ra sự tiến bộ rõ nhất lại bắt đầu từ những thói quen rất nhỏ hằng ngày. Thư mục không còn lộn xộn, tên file không còn tuỳ hứng, mình học được cách phân loại tài liệu khoa học hơn, thuận tiện cho việc tra cứu ngữ liệu song ngữ Việt - Nhật sau này.</p>
         </div>
       </div>
-      <div class="chat-row right reveal">
+      <div class="chat-row reveal">
         <div class="chat-avatar">🤖</div>
         <div class="chat-bubble">
           <h3>Xác định đúng vị trí của công cụ</h3>
           <p>Qua từng bài thực hành, mình hiểu rằng AI chỉ thực sự hữu ích khi người dùng vẫn giữ được tư duy phản biện của riêng mình. Mình xem AI như một người bạn đồng hành gợi mở ý tưởng ban đầu, còn việc kiểm chứng ngữ cảnh vẫn luôn cần sự cẩn thận của bản thân.</p>
         </div>
       </div>
-      <div class="chat-row left reveal">
+      <div class="chat-row reveal">
         <div class="chat-avatar">🎯</div>
         <div class="chat-bubble">
           <h3>Điều đọng lại nhiều nhất</h3>
-          <p>Giá trị lớn nhất sau học kỳ này là việc tự xây được cho mình một quy chuẩn làm việc nghiêm túc, minh bạch trong môi trường số - điểm tựa để tự tin ứng dụng công nghệ vào những nghiên cứu sâu hơn về ngôn ngữ và văn hoá Nhật Bản.</p>
+          <p>Giá trị lớn nhất sau học kỳ này là việc tự xây được cho mình một quy chuẩn làm việc nghiêm túc, minh bạch trong môi trường số, điểm tựa để tự tin ứng dụng công nghệ vào những nghiên cứu sâu hơn về ngôn ngữ và văn hoá Nhật Bản.</p>
         </div>
       </div>
     </div>
 
     <div class="final-banner reveal">
       <h3>Lời kết cho một học kỳ 🌸</h3>
-      <p>Nhìn lại cả chặng đường, mình biết ơn vì đã có cơ hội thử - sai - và điều chỉnh với từng công cụ, để giờ đây có thể tự tin nói rằng mình đã sẵn sàng cho những học phần công nghệ tiếp theo.</p>
+      <p>Nhìn lại cả chặng đường, mình biết ơn vì đã có cơ hội thử, sai và tự điều chỉnh với từng công cụ, để giờ đây có thể tự tin nói rằng mình đã sẵn sàng cho những học phần công nghệ tiếp theo.</p>
       <div class="medal-row">
         <div class="medal"><div class="num">06/06</div><div class="label">Bài tập hoàn thành</div></div>
         <div class="medal"><div class="num">100%</div><div class="label">Trung thực học thuật</div></div>
@@ -539,79 +526,78 @@
       icon: "🗂️", title: "Quản lý tệp tin & thư mục",
       goal: "Rèn luyện thao tác quản lý tệp và thư mục thành thạo để xây dựng nếp lưu trữ tài liệu học tập gọn gàng, dễ tra cứu.",
       process: "Luyện tập tạo, sắp xếp, đổi tên và sao lưu tệp bằng cả chuột lẫn phím tắt, đồng thời tìm hiểu cách khôi phục dữ liệu an toàn từ Thùng rác.",
-      link: "https://docs.google.com/document/d/1oSbfbWVfPwU7zCKCNCyy1LP3wqZ_sj0c/edit?usp=drive_link&ouid=100698810264392713077&rtpof=true&sd=true",
+      link: "https://docs.google.com/document/d/12WE83tctDp6ZYWud_1TLdmOt1QK6LZbp/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
       points: [
         { b: "Nền móng sắp xếp dữ liệu", t: "Thành thạo các thao tác cơ bản nhưng quan trọng: tạo thư mục con, sao chép, di chuyển, đổi tên tệp theo một quy tắc đặt tên nhất quán." },
         { b: "Thao tác nhanh bằng phím tắt", t: "Vận dụng linh hoạt các tổ hợp phím như Windows + E, Ctrl + C/V/X để xử lý tệp nhanh hơn nhiều so với chỉ dùng chuột." },
         { b: "Phân biệt xoá tạm và xoá hẳn", t: "Hiểu rõ sự khác nhau giữa đưa tệp vào Thùng rác và xoá vĩnh viễn bằng Shift + Delete, nhờ đó chủ động khôi phục khi cần." },
-        { b: "Tổng kết bài học", t: "Bài tập tưởng nhỏ này lại là nền tảng cho một thói quen lưu trữ khoa học, giúp mình an tâm hơn khi khối lượng tài liệu học phần ngày một dày lên.", summary: true },
+        { b: "Tóm lại", t: "Bài tập tưởng nhỏ này lại là nền tảng cho một thói quen lưu trữ khoa học, giúp mình an tâm hơn khi khối lượng tài liệu học phần ngày một dày lên.", summary: true },
       ]
     },
     {
       icon: "🔎", title: "Đánh giá học thuật",
       goal: "Nâng cao khả năng tìm kiếm, sàng lọc và thẩm định độ tin cậy của nguồn tài liệu trước khi đưa vào bài viết.",
       process: "So sánh, đối chiếu nhiều nguồn khác nhau, ưu tiên các công trình có bình duyệt, và trình bày danh mục tham khảo theo chuẩn Harvard.",
-      link: "https://drive.google.com/file/d/1KqdTiT2FQ74-dMyLsDbJuEe5vqKCJTs3/view?usp=drive_link",
+      link: "https://docs.google.com/document/d/1xNcPg2J7Wt7PSWL2a2YBcPtPjfPBTF5F/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
       points: [
-        { b: "Tiêu chí sàng lọc nguồn", t: "Biết đánh giá độ tin cậy của một tài liệu dựa trên uy tín tác giả, đơn vị xuất bản, số lượt trích dẫn và việc có qua bình duyệt hay không." },
-        { b: "Trích dẫn đúng chuẩn", t: "Thành thạo cách trình bày danh mục tham khảo theo chuẩn Harvard - kỹ năng cần thiết khi làm các bài nghiên cứu về ngôn ngữ, văn hoá." },
+        { b: "Tiêu trị sàng lọc nguồn", t: "Biết đánh giá độ tin cậy của một tài liệu dựa trên uy tín tác giả, đơn vị xuất bản, số lượt trích dẫn và việc có qua bình duyệt hay không." },
+        { b: "Trích dẫn đúng chuẩn", t: "Thành thạo cách trình bày danh mục tham khảo theo chuẩn Harvard, kỹ năng cần thiết khi làm các bài nghiên cứu về ngôn ngữ, văn hoá." },
         { b: "Đối chiếu nhiều chiều", t: "Hiểu rằng mỗi loại nguồn có vai trò riêng, nên biết kết hợp giữa tài liệu chuyên sâu (bình duyệt) và nguồn cập nhật thực tiễn để có góc nhìn toàn diện." },
         { b: "Chọn nguồn sát bối cảnh", t: "Ưu tiên những tài liệu phản ánh đúng bối cảnh giáo dục và văn hoá trong nước để tăng tính ứng dụng cho bài viết của mình." },
-         { b: "Tổng kết bài học", t: "Bài tập này giúp mình nâng cao khả năng nhận biết về độ tin cậy của một tài liệu, hiểu rằng cần có một góc nhìn toàn hiện để ứng dụng tài liệu vào bài làm của bản thân một cách hiệu quả.", summary: true },
       ]
     },
     {
       icon: "🤖", title: "Viết Prompt hiệu quả",
-      goal: "Làm chủ kỹ năng xây dựng câu lệnh có cấu trúc để khai thác tối đa năng lực của các mô hình ngôn ngữ lớn.",
-      process: "Thử nghiệm khung CLEAR, kết hợp kỹ thuật gán vai trò, ví dụ mẫu và yêu cầu suy luận từng bước để nâng chất lượng phản hồi của AI.",
-      link: "https://drive.google.com/file/d/1gle2Zdce3ywXNm_avb_aVwnH0zCUuV6a/view?usp=drive_link",
+      goal: "Làm chủ kỹ năng xây dựng câu lệnh (prompt) có cấu trúc để khai thác tối đa năng lực của các mô hình ngôn ngữ lớn.",
+      process: "Thử nghiệm khung C.O.R.E, kết hợp kỹ thuật gán vai trò, ví dụ mẫu và yêu cầu suy luận từng bước để nâng chất lượng phản hồi của AI.",
+      link: "https://docs.google.com/document/d/1-G7omuzX1g6A013TOkOc7rnmGODlItRX/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
       points: [
-        { b: "Tư duy thiết kế câu lệnh", t: "Chuyển từ việc hỏi ngẫu hứng sang xây dựng prompt có cấu trúc theo mô hình CLEAR, biến AI thành trợ lý sát với từng nhu cầu cụ thể." },
+        { b: "Tư duy thiết kế câu lệnh", t: "Chuyển từ việc hỏi ngẫu hứng sang xây dựng prompt có cấu trúc theo mô hình C.O.R.E, biến AI thành trợ lý sát với từng nhu cầu cụ thể." },
         { b: "Kỹ thuật cải thiện đầu ra", t: "Áp dụng gán vai trò, ví dụ mẫu (few-shot) và yêu cầu suy luận từng bước (chain-of-thought) để hạn chế các câu trả lời chung chung, thiếu chính xác." },
         { b: "Ưu tiên thời gian chuẩn bị", t: "Nhận ra rằng đầu tư thời gian viết prompt kỹ ngay từ đầu giúp tiết kiệm đáng kể công sức chỉnh sửa về sau." },
         { b: "Tạo kết quả sát nhu cầu", t: "Biết định hướng AI cho ra sản phẩm phù hợp với mục đích học thuật cụ thể, ví dụ như dàn ý ôn tập theo thang Bloom hay bản tóm tắt tài liệu chuyên ngành ngôn ngữ - văn hoá Nhật Bản." },
-        { b: "Tổng kết bài học", t: "Dự án này rèn cho mình không chỉ kỹ năng ra lệnh cho AI mà còn cả tư duy logic và khả năng diễn đạt rõ ràng - nền tảng để làm chủ công cụ công nghệ hiệu quả hơn.", summary: true },
+        { b: "Tóm lại", t: "Dự án này rèn cho mình không chỉ kỹ năng ra lệnh cho AI mà còn cả tư duy logic và khả năng diễn đạt rõ ràng, nền tảng để làm chủ công cụ công nghệ hiệu quả hơn.", summary: true },
       ]
     },
     {
       icon: "🤝", title: "Hợp tác trực tuyến",
       goal: "Sử dụng thành thạo các công cụ cộng tác trực tuyến để phối hợp làm việc nhóm hiệu quả và trơn tru hơn.",
       process: "Kết hợp Trello để theo dõi tiến độ và trao đổi nhanh, chia nhỏ đầu việc kèm deadline cụ thể cho từng thành viên.",
-      link: "https://drive.google.com/file/d/1AsqkGiPRSZj2PC2XGBpGsvYkqfZLtY8a/view?usp=drive_link",
+      link: "https://docs.google.com/document/d/1sddYXB4HygTL1wa31HRO_MNI16QPOqFk/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
       points: [
-        { b: "Kết nối công cụ hợp lý", t: "Biết phối hợp Trello, Google Drive và Google Docs thành một quy trình liền mạch thay vì sử dụng rời rạc, thiếu liên kết." },
+        { b: "Kết nối công cụ hợp lý", t: "Biết phối hợp Trello, Google Drive và Google Docs thành một quy trình liền mạch thay vị sử dụng rời rạc, thiếu liên kết." },
         { b: "Kỷ luật cập nhật tiến độ", t: "Hình thành thói quen cập nhật trạng thái công việc trực tiếp trên hệ thống chung thay vì chỉ trao đổi miệng, giúp cả nhóm nắm tiến độ minh bạch." },
         { b: "Xử lý vướng mắc thực tế", t: "Học cách khắc phục các tình huống thường gặp khi làm nhóm như trôi thông tin, bằng các tính năng ghim và bình chọn trên nền tảng." },
         { b: "Chủ động sắp xếp bản thân", t: "Biết chia nhỏ nhiệm vụ lớn thành các đầu việc rõ ràng, có mốc thời gian cụ thể, tránh dồn việc vào phút chót." },
-        { b: "Tóm lại tổng kết bài học", t: "Không chỉ nắm chắc công cụ, mình còn hình thành được tư duy làm việc nhóm hiện đại - kỹ năng mềm không thể thiếu trong môi trường số.", summary: true },
+        { b: "Tóm lại", t: "Không chỉ nắm chắc công cụ, mình còn hình thành được tư duy làm việc nhóm hiện đại, kỹ năng mềm không thể thiếu trong môi trường số.", summary: true },
       ]
     },
     {
       icon: "🎨", title: "Sáng tạo nội dung với AI",
       goal: "Ứng dụng AI tạo sinh để làm sản phẩm trình bày sinh động hơn nhưng vẫn giữ được dấu ấn cá nhân.",
       process: "Phối hợp ChatGPT, DALL·E và Canva AI để lên ý tưởng, dựng hình và hoàn thiện sản phẩm theo tỉ lệ khoảng 40% AI - 60% cá nhân.",
-      link: "https://docs.google.com/document/d/1AW3wVuPbXWEPMAzmHxUhyg7NC6x8PpEF/edit?usp=drive_link&ouid=100698810264392713077&rtpof=true&sd=true",
+      link: "https://docs.google.com/document/d/1TNzw-drYQXpK2yK1djCWnlPFjpKx9DHy/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
       points: [
         { b: "AI là trợ lý, không thay thế", t: "Hiểu rằng AI giúp giảm tải công đoạn tìm ý tưởng và dựng hình, nhưng phong cách và quyết định cuối cùng vẫn thuộc về mình." },
         { b: "Ra lệnh và tinh chỉnh liên tục", t: "Luyện cách mô tả yêu cầu chi tiết, sau đó tinh chỉnh prompt nhiều lần khi kết quả ban đầu chưa như mong muốn." },
-        { b: "Không dùng nguyên si", t: "Hình thành thói quen luôn kiểm tra, chỉnh sửa nội dung do AI tạo ra để đảm bảo đúng ngữ cảnh và chính xác về thông tin." },
+        { b: "Không dùng nguyên si", t: "Hình thành thói quen luôn kiểm tra, chỉnh sửa nội dung do AI tạo ra để đảm bảo đúng ngữ cảnh và chính xác về thông tin, đặc biệt với các thuật ngữ liên quan đến Nhật Bản." },
         { b: "Tận dụng thế mạnh từng nền tảng", t: "Biết khai thác ưu điểm riêng của từng công cụ - ChatGPT cho nội dung, DALL·E cho hình ảnh, Canva AI cho thiết kế - để tối ưu quy trình sáng tạo." },
         { b: "Ý thức đạo đức số", t: "Luôn minh bạch khi công bố phần nào có sự hỗ trợ của AI, tôn trọng bản quyền và chịu trách nhiệm cuối cùng với sản phẩm của mình." },
-        { b: "Tổng kết bài học", t: "Mình đã chuyển từ vai trò người dùng công cụ thụ động sang người điều phối quy trình sáng tạo, biết cân bằng giữa sức mạnh AI và dấu ấn cá nhân.", summary: true },
+        { b: "Tóm lại", t: "Mình đã chuyển từ vai trò người dùng công cụ thụ động sang người điều phối quy trình sáng tạo, biết cân bằng giữa sức mạnh AI và dấu ấn cá nhân.", summary: true },
       ]
     },
     {
       icon: "⚖️", title: "Sử dụng AI có trách nhiệm",
       goal: "Hiểu rõ nguyên tắc liêm chính học thuật khi ứng dụng AI vào việc học và nghiên cứu.",
       process: "Tìm hiểu quy định của trường về sử dụng AI, tự đối chiếu nội dung AI tạo ra với nguồn gốc, đồng thời trích dẫn minh bạch.",
-      link: "https://docs.google.com/document/d/1ZWJuKPO1EJW53t5OmtIRUcB34JVl7XsD/edit?usp=drive_link&ouid=100698810264392713077&rtpof=true&sd=true",
+      link: "https://docs.google.com/document/d/18XCMtVj7HJg5NsAhBgkdO5wxWW-rpsu0/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
       points: [
         { b: "Ranh giới hỗ trợ và gian lận", t: "Phân biệt rõ giữa dùng AI như một trợ lý học tập (gợi ý ý tưởng, dàn ý) với việc sao chép nguyên văn - vốn bị xem là gian lận học thuật." },
         { b: "Không tin tuyệt đối vào AI", t: "Luôn đối chiếu, kiểm chứng thông tin AI đưa ra với nguồn học thuật đáng tin cậy trước khi đưa vào sản phẩm cuối." },
         { b: "Minh bạch khi trích dẫn", t: "Ý thức rõ tầm quan trọng của việc công khai vai trò của AI trong bài làm và trích dẫn nguồn đầy đủ để tôn trọng bản quyền." },
         { b: "Giữ vững tư duy độc lập", t: "Hiểu rằng AI chỉ thực sự hữu ích khi đi cùng khả năng tư duy phản biện của người dùng, tránh phụ thuộc dẫn đến suy giảm kỹ năng tự học." },
         { b: "Tuân thủ quy định học thuật", t: "Áp dụng đúng các nguyên tắc đạo đức trong chính sách của trường để vừa khai thác công nghệ, vừa giữ vững sự chính trực." },
-        { b: "Tổng kết bài học", t: "Dự án đã giúp mình xây dựng một khung nguyên tắc cá nhân vững vàng, để sử dụng AI một cách chủ động, có trách nhiệm và tự tin hơn trong hành trình học tập.", summary: true },
+        { b: "Tóm lại", t: "Dự án đã giúp mình xây dựng một khung nguyên tắc cá nhân vững vàng, để sử dụng AI một cách chủ động, có trách nhiệm và tự tin hơn trong hành trình học tập.", summary: true },
       ]
     },
   ];
