@@ -254,6 +254,12 @@
   .modal-fields b{color:var(--blue-deep);}
   .modal-link{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);border:2px solid var(--blue-deep);color:var(--ink);
     padding:9px 16px;border-radius:999px;font-weight:800;font-size:.83rem;text-decoration:none;margin-bottom:22px;}
+  .modal-image-wrap{margin-bottom:20px;}
+  .modal-image{display:block;width:100%;border-radius:16px;border:2.5px solid var(--blue-deep);box-shadow:var(--pop-sm);}
+  .modal-image-caption{margin-top:8px;font-size:.78rem;color:var(--ink-soft);text-align:center;}
+  .modal-image-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    height:140px;border-radius:16px;border:2.5px dashed var(--blue-mid);background:var(--bg-1);color:var(--ink-soft);font-size:.85rem;text-align:center;}
+  .modal-image-placeholder .ph-icon{font-size:1.6rem;}
   .detail-list{display:flex;flex-direction:column;gap:11px;}
   .detail-point{display:flex;gap:10px;font-size:.9rem;color:var(--ink);}
   .detail-point .dot{width:9px;height:9px;border-radius:50%;background:var(--blue-mid);margin-top:7px;flex-shrink:0;}
@@ -448,6 +454,10 @@
       <div class="row"><b>Mục tiêu:</b> <span id="modalGoal"></span></div>
       <div class="row"><b>Quá trình thực hiện:</b> <span id="modalProcess"></span></div>
     </div>
+    <div class="modal-image-wrap" id="modalImageWrap" style="display:none;">
+      <img id="modalImage" class="modal-image" src="" alt="">
+      <div class="modal-image-caption" id="modalImageCaption"></div>
+    </div>
     <a href="#" id="modalLink" class="modal-link" target="_blank" rel="noopener">📁 Xem tài liệu chi tiết</a>
     <div class="detail-list" id="modalPoints"></div>
   </div>
@@ -525,38 +535,40 @@
   const exercises = [
     {
       icon: "🗂️", title: "Quản lý tệp tin & thư mục",
-      goal: "Làm chủ phương pháp sắp xếp, tổ chức và quản lý không gian lưu trữ dữ liệu cá nhân một cách tối ưu và gọn gàng.",
-      process: "Thực hành xây dựng sơ đồ hình cây, phân loại tài liệu theo danh mục chức năng và rèn luyện các thao tác nhanh bằng phím tắt.",
+      goal: "Xây dựng một hệ thống lưu trữ tài liệu học tập khoa học, giúp tiết kiệm thời gian tìm kiếm và đảm bảo tính chuyên nghiệp khi lưu trữ, chia sẻ trực tuyến.",
+      process: "Thiết lập cây thư mục phân loại rõ ràng theo từng môn học và loại tài liệu, đồng thời áp dụng quy tắc đặt tên tệp thống nhất cho toàn bộ dữ liệu cá nhân.",
       link: "https://docs.google.com/document/d/12WE83tctDp6ZYWud_1TLdmOt1QK6LZbp/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
+      image: "images/bai1-cay-thu-muc.png",
+      imageCaption: "Cấu trúc thư mục thực tế được sử dụng để lưu trữ tài liệu học tập.",
       points: [
-        { b: "Xây dựng tư duy lưu trữ", t: "Thiết lập hệ thống phân cấp dữ liệu logic giúp giảm thiểu thời gian tìm kiếm thông tin hằng ngày." },
-        { b: "Nguyên tắc đặt tên khoa học", t: "Áp dụng quy chuẩn đặt tên file đồng nhất (không dấu, sử dụng dấu gạch dưới) tránh xung đột hệ thống." },
-        { b: "Tối ưu hóa thao tác", t: "Luyện tập sử dụng phím tắt thay vì chuột để xử lý sao chép, di chuyển, xóa và khôi phục tệp tin nhanh chóng hơn." },
+        { b: "Sơ đồ cây thư mục", t: "Phân loại tài liệu theo từng môn học và từng loại tài liệu để dễ dàng định vị khi cần tìm kiếm." },
+        { b: "Quy tắc đặt tên tệp thống nhất", t: "Áp dụng cấu trúc [Mã môn học]_[Loại tài liệu]_[Nội dung]_[Tên]_[Mã số sinh viên], dùng dấu gạch dưới hoặc gạch nối để tránh lỗi khi lưu trữ trực tuyến." },
+        { b: "Minh họa thực tế", t: "Cấu trúc thư mục cá nhân được trình bày trực quan qua hình ảnh minh họa bên dưới." },
         { b: "Bài học rút ra", t: "Tính ngăn nắp trên không gian số là bước khởi đầu cốt lõi giúp bảo vệ dữ liệu học tập an toàn, chuyên nghiệp.", summary: true },
       ]
     },
     {
       icon: "🔎", title: "Đánh giá tài liệu học thuật",
-      goal: "Phát triển tư duy phản biện trong việc định vị, sàng lọc và kiểm chứng độ chính xác của các nguồn thông tin trên internet.",
-      process: "Thực hành đối chiếu nội dung từ nhiều nguồn, sử dụng công cụ tìm kiếm nâng cao và trình bày danh mục tài liệu theo chuẩn Harvard.",
+      goal: "Rèn luyện tư duy phản biện khi tìm kiếm, sàng lọc và đánh giá độ tin cậy của tài liệu học thuật trên các nền tảng uy tín.",
+      process: "Tìm kiếm trên Google Scholar, Microsoft Academic và các trang học thuật chuyên ngành bằng từ khóa cụ thể, sau đó áp dụng bộ tiêu chí CRAAP Test để chọn lọc nguồn tài liệu phù hợp nhất.",
       link: "https://docs.google.com/document/d/1xNcPg2J7Wt7PSWL2a2YBcPtPjfPBTF5F/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
       points: [
-        { b: "Bộ tiêu chí thẩm định", t: "Biết cách đánh giá chất lượng tài liệu dựa trên mức độ cập nhật, uy tín tác giả và kiểm duyệt chuyên môn." },
-        { b: "Khai thác dữ liệu sâu", t: "Sử dụng hiệu quả các toán tử tìm kiếm nâng cao để nhanh chóng tiếp cận nguồn sách báo, luận văn tin cậy." },
-        { b: "Trích dẫn nguồn chuẩn mực", t: "Thực hành thiết lập danh mục tham khảo đúng định dạng để tôn trọng quyền sở hữu trí tuệ của tác giả." },
+        { b: "Từ khóa tìm kiếm", t: "Sử dụng các cụm từ khóa như \"Phương pháp học tiếng Nhật hiệu quả\", \"Effective learning Kanji Methods\", \"shadowing in language learning\" và \"spaced repetition Japanese vocabulary\"." },
+        { b: "Sàng lọc bằng CRAAP Test", t: "Từ 25-30 tài liệu thu thập ban đầu, đánh giá dựa trên tính cập nhật, mức độ liên quan, thẩm quyền, tính chính xác và mục đích để chọn ra 10 tài liệu phù hợp nhất." },
+        { b: "Cơ cấu nguồn tài liệu", t: "Gồm 5 bài báo khoa học từ tạp chí uy tín, cùng sách chuyên khảo và nguồn mở đáng tin cậy, tập trung vào spaced repetition, học Kanji có hệ thống, phương pháp Shadowing và học qua giao tiếp." },
         { b: "Bài học rút ra", t: "Nhận thức rõ tầm quan trọng của việc hoài nghi khoa học, nói không với những thông tin mập mờ, thiếu kiểm chứng.", summary: true },
       ]
     },
     {
       icon: "🤖", title: "Viết Prompt hiệu quả",
-      goal: "Làm chủ kỹ năng thiết kế câu lệnh có cấu trúc rõ ràng nhằm định hướng các mô hình AI phản hồi chính xác theo yêu cầu.",
-      process: "Ứng dụng mô hình CLEAR, kỹ thuật đóng vai và đưa ví dụ mẫu trực quan để tối ưu hóa đầu ra từ các trợ lý ảo.",
+      goal: "Làm chủ kỹ năng thiết kế câu lệnh (prompt) qua ba mức độ cơ bản – cải tiến – nâng cao, để định hướng AI phản hồi chính xác theo từng tác vụ học tập cụ thể.",
+      process: "Thử nghiệm và so sánh hiệu quả prompt trên ba tác vụ: tóm tắt tài liệu, giải thích khái niệm phức tạp (Deep Learning) và tạo bộ câu hỏi ôn tập, từ đó rút ra công thức prompt tối ưu.",
       link: "https://docs.google.com/document/d/1-G7omuzX1g6A013TOkOc7rnmGODlItRX/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
       points: [
-        { b: "Công thức hóa câu lệnh", t: "Chuyển đổi thói quen hỏi đáp tự do sang viết prompt có mục tiêu cụ thể, bối cảnh rõ ràng và định dạng đầu ra chi tiết." },
-        { b: "Kiểm soát độ nhiễu thông tin", t: "Áp dụng kỹ thuật hạn chế ảo tưởng của AI, yêu cầu lập luận từng bước để thu về phản hồi thực chất, giá trị." },
-        { b: "Lựa chọn công cụ phù hợp", t: "Nhận diện thế mạnh của từng nền tảng AI khác nhau để áp dụng đúng cho từng tác vụ học tập cụ thể." },
-        { b: "Bài học rút ra", t: "Chất lượng câu trả lời của AI phụ thuộc trực tiếp vào tư duy đặt câu hỏi của người dùng. Công nghệ chỉ phát huy sức mạnh khi có người điều phối thông thái.", summary: true },
+        { b: "Tóm tắt bài đọc", t: "Prompt cơ bản cho kết quả dài, thiếu cấu trúc; prompt cải tiến (yêu cầu 5 ý chính) giúp gọn hơn; prompt nâng cao (vai trò trợ lý giảng viên, giới hạn 120-150 từ) đạt 9/10 điểm với nội dung mạch lạc, dễ ghi nhớ." },
+        { b: "Giải thích khái niệm Deep Learning", t: "Prompt cơ bản lan man, nhiều thuật ngữ hàn lâm; prompt cải tiến (chỉ định đối tượng sinh viên năm nhất) giúp dễ hiểu hơn; prompt nâng cao (nhập vai giảng viên, dùng ví von, kèm câu hỏi kiểm tra) đạt hiệu quả cao nhất." },
+        { b: "Tạo bộ câu hỏi ôn tập", t: "Prompt cơ bản cho câu hỏi trừu tượng, thiếu đáp án; prompt cải tiến (quy định 15 câu) chưa phân hóa được độ khó; prompt nâng cao áp dụng khung Bloom cho bộ câu hỏi chất lượng, sát đề thi thực tế." },
+        { b: "Bài học rút ra", t: "Prompt càng được cung cấp ngữ cảnh rõ ràng (role prompting), có ràng buộc định dạng, hướng dẫn từng bước và áp dụng khung lý thuyết (như Bloom Taxonomy) thì kết quả từ AI càng sát nhu cầu thực tế, hỗ trợ học tập hiệu quả hơn.", summary: true },
       ]
     },
     {
@@ -576,6 +588,7 @@
       goal: "Khai thác sức mạnh của trí tuệ nhân tạo để lên ý tưởng và thiết kế sản phẩm truyền thông sáng tạo nhưng vẫn đậm dấu ấn cá nhân.",
       process: "Kết hợp Canva AI, ChatGPT và các công cụ tạo ảnh nghệ thuật để hoàn thiện slide thuyết trình và ấn phẩm truyền thông trực quan.",
       link: "https://docs.google.com/document/d/1TNzw-drYQXpK2yK1djCWnlPFjpKx9DHy/edit?usp=drive_link&ouid=108736802703435076245&rtpof=true&sd=true",
+      imagePlaceholder: "Ảnh minh họa sẽ được cập nhật",
       points: [
         { b: "Tư duy thiết kế hiện đại", t: "Nắm vững nguyên lý kết hợp màu sắc, bố cục và font chữ tối giản để sản phẩm đạt tính thẩm mỹ cao." },
         { b: "Sử dụng AI như trợ lý ý tưởng", t: "Ủy quyền cho AI xử lý việc tìm kiếm chất liệu ban đầu, dành 60% thời gian còn lại để cá nhân hóa nội dung." },
@@ -619,6 +632,9 @@
   const modalLink = document.getElementById('modalLink');
   const modalPoints = document.getElementById('modalPoints');
   const modalClose = document.getElementById('modalClose');
+  const modalImageWrap = document.getElementById('modalImageWrap');
+  const modalImage = document.getElementById('modalImage');
+  const modalImageCaption = document.getElementById('modalImageCaption');
 
   function openModal(ex){
     modalIcon.textContent = ex.icon;
@@ -626,6 +642,19 @@
     modalGoal.textContent = ex.goal;
     modalProcess.textContent = ex.process;
     modalLink.href = ex.link;
+
+    if (ex.image) {
+      modalImageWrap.innerHTML = `<img id="modalImage" class="modal-image" src="${ex.image}" alt="${ex.imageCaption || ex.title}">
+        <div class="modal-image-caption">${ex.imageCaption || ''}</div>`;
+      modalImageWrap.style.display = '';
+    } else if (ex.imagePlaceholder) {
+      modalImageWrap.innerHTML = `<div class="modal-image-placeholder"><span class="ph-icon">📷</span><span>${ex.imagePlaceholder}</span></div>`;
+      modalImageWrap.style.display = '';
+    } else {
+      modalImageWrap.innerHTML = '';
+      modalImageWrap.style.display = 'none';
+    }
+
     modalPoints.innerHTML = ex.points.map(p => `
       <div class="detail-point${p.summary ? ' summary' : ''}">
         <span class="dot"></span>
